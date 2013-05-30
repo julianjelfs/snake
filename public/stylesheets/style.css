@@ -8,19 +8,24 @@ a {
 }
 
 .food {
-  background-color:red;  
-  position:absolute;
+  background-color:red; 
 }
 
 .segment {
-  background-color:black;  
+  background-color:black;    
+}
+
+.food, .segment {
   position:absolute;
+  -webkit-box-shadow: 3px 3px 8px rgba(76,43,47,.4);
+  -moz-box-shadow: 3px 3px 8px rgba(76,43,47,.4);
+  box-shadow: 3px 3px 8px rgba(76,43,47,.4);
 }
 
 .arena {
   position:absolute;
   background-color: #ffffd6;
-  padding: 20px;
+  padding: 0;
   width:500px;
   height:500px;
   -webkit-border-radius: 6px 6px 6px 6px;

@@ -55,7 +55,10 @@ scope.Segment = function (options){
 
 scope.Snake = function (options){
   
-  var food = $("<div class='food'></div>").appendTo("div.arena").hide();
+  var food = $("div.food");
+  if(food.size()==0){
+    food = $("<div class='food'></div>").appendTo("div.arena").hide();
+  }
   var scoreSpan = $("#score");
   var start = $("#start");
   var tail, head, loopHandle, up = 1,
@@ -95,10 +98,11 @@ scope.Snake = function (options){
   }
   
   function outOfBounds(pos){        
-    if(pos.left > (options.x * options.snakeSize) + options.snakeSize
+    if(pos.left > (options.x * options.snakeSize) - options.snakeSize
        || pos.left < 0 
-       || pos.top > (options.y * options.snakeSize) + options.snakeSize
+       || pos.top > (options.y * options.snakeSize) - options.snakeSize
        || pos.top < 0 ) {
+      console.log(JSON.stringify(pos));
       return true;  
     }
     return false;
@@ -145,6 +149,11 @@ scope.Snake = function (options){
   
   return {
     start : function(){
+      $("div.segment").remove();
+      $("div.arena").css({
+        width : options.x * options.snakeSize,
+        height : options.y * options.snakeSize
+      });
       tail = head = new scope.Segment(options);  
       foodPos = plantFood();
       loopHandle = setInterval(eventLoop, options.interval);      
