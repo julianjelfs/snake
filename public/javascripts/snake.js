@@ -1,5 +1,5 @@
 (function(scope){
-
+  
   function getRandomCoords(options){
     var rx = getRandomNum(options.x);
     var ry = getRandomNum(options.y);
@@ -61,7 +61,7 @@ scope.Snake = function (options){
   }
   var scoreSpan = $("#score");
   var start = $("#start");
-  var tail, head, loopHandle, up = 1,
+  var keypresses = [], tail, head, loopHandle, up = 1,
         down = 2,
         left = 3,
         right = 4,
@@ -69,15 +69,7 @@ scope.Snake = function (options){
         foodPos;
   
   $("body").keydown(function(e) {
-    if (e.which == 37 && direction != right) {
-      direction = left;
-    } else if (e.which == 38 && direction != down) {
-      direction = up;
-    } else if (e.which == 39 && direction != left) {
-      direction = right;
-    } else if (e.which == 40 && direction != up) {
-      direction = down;
-    }
+    keypresses.push(e.which);    
   });
   
   function incrementScore(){
@@ -111,8 +103,9 @@ scope.Snake = function (options){
   function gameover(msg){
     clearInterval(loopHandle);
     start.show();
-    scoreSpan.text("0");
     alert(msg + ". Game Over");    
+    scoreSpan.text("0");
+    $("div.segment").remove();
   }
   
   function crossedOver(pos){
@@ -126,6 +119,21 @@ scope.Snake = function (options){
   }
   
   function eventLoop(){
+    if(keypresses.length > 0){
+      var key = keypresses[0]
+      keypresses.splice(0,1);
+      if (key == 37 && direction != right) {
+        direction = left;
+      } else if (key == 38 && direction != down) {
+        direction = up;
+      } else if (key == 39 && direction != left) {
+        direction = right;
+      } else if (key == 40 && direction != up) {
+        direction = down;
+      }
+    }
+    
+    
     var pos = head.position();
     var newPos = {
       left : direction == up || direction == down ? pos.left : (direction == left ? pos.left - options.snakeSize : pos.left + options.snakeSize),
@@ -157,7 +165,6 @@ scope.Snake = function (options){
   
   return {
     start : function(){
-      $("div.segment").remove();
       $("div.arena").css({
         width : options.x * options.snakeSize,
         height : options.y * options.snakeSize
