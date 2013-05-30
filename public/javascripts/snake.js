@@ -56,6 +56,8 @@ scope.Segment = function (options){
 scope.Snake = function (options){
   
   var food = $("<div class='food'></div>").appendTo("div.arena").hide();
+  var scoreSpan = $("#score");
+  var start = $("#start");
   var tail, head, loopHandle, up = 1,
         down = 2,
         left = 3,
@@ -76,6 +78,9 @@ scope.Snake = function (options){
   });
   
   function incrementScore(){
+    var score = parseInt(scoreSpan.text());
+    score += 10;
+    scoreSpan.text(score);
   }
   
   function plantFood(){
@@ -101,6 +106,8 @@ scope.Snake = function (options){
   
   function gameover(msg){
     clearInterval(loopHandle);
+    start.show();
+    scoreSpan.text("0");
     alert(msg + ". Game Over");    
   }
   
@@ -133,8 +140,7 @@ scope.Snake = function (options){
     if(hitFood){
       incrementScore();
       foodPos = plantFood();       
-    }
-   
+    }   
   }
   
   return {
