@@ -35,3 +35,8 @@ a {
   background: -ms-linear-gradient(top, #f6f6f6, #ffffff);
   background: -o-linear-gradient(top, #f6f6f6, #ffffff);
 }
+
+#score {
+  color:red;
+  font-style: bold;
+}

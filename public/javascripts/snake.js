@@ -43,19 +43,24 @@ scope.Segment = function (options){
       } else {
         next.addSegment();  
       }
+    },
+    segmentsAtPos : function(headPos){
+      var pos = this.position();
+      var num = (headPos.top == pos.top && headPos.left == pos.left) ? 1 : 0;
+      return next == null ? num : num + next.segmentsAtPos(headPos); 
     }
   }
 }
 
 
 scope.Snake = function (options){
-   
+  
+  var food = $("<div class='food'></div>").appendTo("div.arena").hide();
   var tail, head, loopHandle, up = 1,
         down = 2,
         left = 3,
         right = 4,
         direction = 4,
-        arena = new Arena(options),
         foodPos;
   
   $("body").keydown(function(e) {
@@ -70,6 +75,20 @@ scope.Snake = function (options){
     }
   });
   
+  function incrementScore(){
+  }
+  
+  function plantFood(){
+    var coords = getRandomCoords(options);      
+    food.css({
+      top : coords.top,
+      left : coords.left,
+      width : options.snakeSize,
+      height : options.snakeSize
+    }).show(); 
+    return coords;
+  }
+  
   function outOfBounds(pos){        
     if(pos.left > (options.x * options.snakeSize) + options.snakeSize
        || pos.left < 0 
@@ -80,13 +99,13 @@ scope.Snake = function (options){
     return false;
   }
   
-  function gameover(){
+  function gameover(msg){
     clearInterval(loopHandle);
-    alert("Game Over");    
+    alert(msg + ". Game Over");    
   }
   
   function crossedOver(pos){
-    return false;
+    return head.segmentsAtPos(pos) > 0;
   }
   
   function eventLoop(){
@@ -96,12 +115,12 @@ scope.Snake = function (options){
       top : direction == left || direction == right ? pos.top : (direction == up ? pos.top - options.snakeSize : pos.top + options.snakeSize)
     }   
        
-    if(outOfBounds(pos)){
-      return gameover();      
+    if(outOfBounds(newPos)){
+      return gameover("Out of bounds");      
     }
     
-    if(crossedOver()){
-      return gameover();  
+    if(crossedOver(newPos)){
+      return gameover("Tangled up");  
     }
     
     var hitFood = newPos.top == foodPos.top && newPos.left == foodPos.left;
@@ -112,7 +131,8 @@ scope.Snake = function (options){
     head.moveTo(newPos);
     
     if(hitFood){
-       foodPos = arena.plantFood();       
+      incrementScore();
+      foodPos = plantFood();       
     }
    
   }
@@ -120,26 +140,8 @@ scope.Snake = function (options){
   return {
     start : function(){
       tail = head = new scope.Segment(options);  
-      foodPos = arena.plantFood();
+      foodPos = plantFood();
       loopHandle = setInterval(eventLoop, options.interval);      
-    }
-  }
-}
-
-scope.Arena = function(options){
-  
-  var food = $("<div class='food'></div>").appendTo("div.arena").hide();
-  
-  return {
-    plantFood : function(){
-      var coords = getRandomCoords(options);      
-      food.css({
-        top : coords.top,
-        left : coords.left,
-        width : options.snakeSize,
-        height : options.snakeSize
-      }).show(); 
-      return coords;
     }
   }
 }
