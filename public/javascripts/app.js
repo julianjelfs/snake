@@ -3,10 +3,11 @@ $(function(){
     $(this).hide();
             
     new Snake({
-      x : 30, 
-      y : 30,
+      x : 25, 
+      y : 25,
       snakeSize : 20,
-      interval : 150
+      interval : 150,
+      speedUp : false
     }).start();
     
   });

@@ -119,6 +119,12 @@ scope.Snake = function (options){
     return head.segmentsAtPos(pos) > 0;
   }
   
+  function speedUp(){
+    clearInterval(loopHandle);
+    options.interval -= 5;
+    loopHandle = setInterval(eventLoop, options.interval);  
+  }
+  
   function eventLoop(){
     var pos = head.position();
     var newPos = {
@@ -143,7 +149,9 @@ scope.Snake = function (options){
     
     if(hitFood){
       incrementScore();
-      foodPos = plantFood();       
+      foodPos = plantFood();  
+      if(options.speedUp)
+        speedUp();
     }   
   }
   
