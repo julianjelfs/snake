@@ -7,15 +7,19 @@ a {
   color: #00B7FF;
 }
 
-.food {
+.food, .ghost-food {
   background-color:red; 
 }
 
-.segment {
+.ghost-food, .ghost-segment{
+    opacity: 0.2;
+}
+
+.segment, .ghost-segment {
   background-color:black;    
 }
 
-.food, .segment {
+.food, .segment, .ghost-food, .ghost-segment {
   position:absolute;
   -webkit-box-shadow: 3px 3px 8px rgba(76,43,47,.4);
   -moz-box-shadow: 3px 3px 8px rgba(76,43,47,.4);

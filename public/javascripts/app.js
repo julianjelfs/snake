@@ -1,35 +1,48 @@
-$(function(){
-  
-  var socket = io.connect('http://express-box-6905.euw1.actionbox.io');
-  
-  $('#ping').click(function(){
-    socket.emit('ping', { msg : 'hello from snake' });  
-  });
-  
-  socket.on('ping', function(data){
-    console.log(data.msg);  
-  });
-  
-  $('#start').click(function(){
-    $(this).hide();
-            
-    new Snake({
-      x : 25, 
-      y : 25,
-      snakeSize : 20,
-      interval : 150,
-      speedUp : true
-    }).start();
-    
-    /*
-    new Snake({
-      x : 25, 
-      y : 25,
-      snakeSize : 20,
-      interval : 150,
-      speedUp : false
-    }).start();
-    */
-    
-  });
+$(function () {
+
+    var socket = io.connect('http://localhost');
+    var started = false;
+
+    var options = {
+        x: 25,
+        y: 25,
+        snakeSize: 10,
+        interval: 150,
+        speedUp: false,
+        ghost: false,
+        socket : socket
+    };
+
+    var start = $("#start");
+    var name = '';
+
+    socket.on('playerStarted', function (data) {
+        new Snake({
+            x: 25,
+            y: 25,
+            snakeSize: 10,
+            interval: 150,
+            speedUp: false,
+            ghost: true,
+            socket : socket
+        }).start();
+
+        if(!started){
+            //startSnake();
+        }
+
+    });
+
+    $("div.arena").css({
+        width: options.x * options.snakeSize,
+        height: options.y * options.snakeSize
+    });
+
+    function startSnake(){
+        socket.emit('start', {name : name});
+        new Snake(options).start();
+        started = true;
+    }
+
+    $('#start').click(startSnake);
 });

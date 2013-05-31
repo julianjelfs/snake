@@ -1,14 +1,13 @@
-
 /**
  * Module dependencies.
  */
 
 var express = require('express')
-  , routes = require('./routes')
-  , user = require('./routes/user')
-  , http = require('http')
-  , path = require('path')
-  , io = require('socket.io');
+    , routes = require('./routes')
+    , user = require('./routes/user')
+    , http = require('http')
+    , path = require('path')
+    , io = require('socket.io');
 
 var app = express();
 
@@ -25,21 +24,41 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // development only
 if ('development' == app.get('env')) {
-  app.use(express.errorHandler());
+    app.use(express.errorHandler());
 }
 
 app.get('/', routes.index);
 app.get('/users', user.list);
 
-var server = http.createServer(app).listen(app.get('port'), function(){
-  console.log('Express server listening on port ' + app.get('port'));
+var server = http.createServer(app).listen(app.get('port'), function () {
+    console.log('Express server listening on port ' + app.get('port'));
 });
 
 io = io.listen(server);
 server.listen(80);
 
+var players = [];
+
 io.sockets.on('connection', function (socket) {
-  socket.on('ping', function (data) {
-    socket.emit('ping', data);
-  });
+
+    socket.on('start', function (data) {
+        players.push(data);
+        socket.broadcast.emit('playerStarted', data);
+    });
+
+    socket.on('foodPlanted', function(data){
+        socket.broadcast.emit('foodPlanted', data);
+    });
+
+    socket.on('moveHead', function(data){
+        socket.broadcast.emit('moveHead', data);
+    });
+
+    socket.on('createHead', function(data){
+        socket.broadcast.emit('createHead', data);
+    });
+
+    socket.on('gameOver', function(msg){
+        socket.broadcast.emit('gameOver', msg);
+    });
 });
