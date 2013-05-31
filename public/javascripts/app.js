@@ -1,6 +1,6 @@
 $(function () {
 
-    var socket = io.connect('http://localhost');
+    var socket = io.connect('http://socket-snake.herokuapp.com/');
     var started = false;
 
     var options = {
