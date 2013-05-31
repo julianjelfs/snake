@@ -11,7 +11,7 @@
     "socket.io" : "*"
   },
   "engines" : {
-      "node" : "*",
+      "node" : "0.10.9",
       "npm" : "1.2.x"
   }
 }
