@@ -1,12 +1,13 @@
 $(function () {
 
-    var socket = io.connect('http://socket-snake.herokuapp.com/');
+    //var socket = io.connect('http://socket-snake.herokuapp.com/');
+    var socket = io.connect('http://localhost/');
     var started = false;
 
     var options = {
         x: 25,
         y: 25,
-        snakeSize: 10,
+        snakeSize: 20,
         interval: 150,
         speedUp: false,
         ghost: false,
@@ -20,7 +21,7 @@ $(function () {
         new Snake({
             x: 25,
             y: 25,
-            snakeSize: 10,
+            snakeSize: 20,
             interval: 150,
             speedUp: false,
             ghost: true,

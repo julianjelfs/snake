@@ -72,6 +72,15 @@
 
         if(!options.ghost){
             $("body").keydown(function (e) {
+                if(e.which == 32){
+                    if(loopHandle != null){
+                        clearInterval(loopHandle);
+                        loopHandle = null;
+                    }  else {
+                        loopHandle = setInterval(eventLoop, options.interval);
+                    }
+                }
+
                 keypresses.push(e.which);
             });
         }
@@ -140,7 +149,9 @@
             alert(msg + ". Game Over");
             scoreSpan.text("0");
             $("div.segment, div.ghost-segment").remove();
-            options.socket.emit("gameOver", msg);
+            if(!options.ghost) {
+                options.socket.emit("gameOver", msg);
+            }
         }
 
         function crossedOver(pos) {
