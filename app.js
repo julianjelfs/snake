@@ -35,7 +35,15 @@ var server = http.createServer(app).listen(app.get('port'), function () {
 });
 
 io = io.listen(server);
-server.listen(80);
+var socket = server.listen(80);
+
+io.configure('transports', [
+    'websocket'
+    , 'flashsocket'
+    , 'htmlfile'
+    , 'xhr-polling'
+    , 'jsonp-polling'
+]);
 
 var players = [];
 

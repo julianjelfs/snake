@@ -2,12 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="68aa5652-3cef-45eb-8690-459478909115" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app.js" afterPath="$PROJECT_DIR$/app.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/app.js" afterPath="$PROJECT_DIR$/public/javascripts/app.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="snake.iws" />
     <ignored path=".idea/workspace.xml" />
     <file path="/Dummy.txt" changelist="68aa5652-3cef-45eb-8690-459478909115" time="1370097583994" ignored="false" />
-    <file path="/app.js" changelist="68aa5652-3cef-45eb-8690-459478909115" time="1370031099535" ignored="false" />
+    <file path="/app.js" changelist="68aa5652-3cef-45eb-8690-459478909115" time="1370099320679" ignored="false" />
     <file path="/index.jade" changelist="68aa5652-3cef-45eb-8690-459478909115" time="1370020420452" ignored="false" />
     <file path="/snake.js" changelist="68aa5652-3cef-45eb-8690-459478909115" time="1370098577177" ignored="false" />
     <file path="/style.css" changelist="68aa5652-3cef-45eb-8690-459478909115" time="1370030284851" ignored="false" />
@@ -62,7 +64,7 @@
       <file leaf-file-name="app.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="26" column="0" selection-start="652" selection-end="652" vertical-scroll-proportion="0.0">
+            <state line="39" column="2" selection-start="961" selection-end="961" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -106,10 +108,10 @@
       <list>
         <option value="$PROJECT_DIR$/views/index.jade" />
         <option value="$PROJECT_DIR$/public/stylesheets/style.css" />
-        <option value="$PROJECT_DIR$/app.js" />
         <option value="$PROJECT_DIR$/ProcFile" />
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/public/javascripts/snake.js" />
+        <option value="$PROJECT_DIR$/app.js" />
         <option value="$PROJECT_DIR$/public/javascripts/app.js" />
       </list>
     </option>
@@ -405,16 +407,16 @@
         <state line="0" column="14" selection-start="14" selection-end="14" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app.js">
+    <entry file="file://$PROJECT_DIR$/public/javascripts/snake.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="0" selection-start="652" selection-end="652" vertical-scroll-proportion="0.0">
+        <state line="154" column="32" selection-start="4839" selection-end="4839" vertical-scroll-proportion="-17.04">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/snake.js">
+    <entry file="file://$PROJECT_DIR$/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="154" column="32" selection-start="4839" selection-end="4839" vertical-scroll-proportion="-17.04">
+        <state line="39" column="2" selection-start="961" selection-end="961" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
