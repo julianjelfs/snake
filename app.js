@@ -39,7 +39,6 @@ var socket = server.listen(80);
 
 io.configure('transports', [
     'websocket'
-    , 'flashsocket'
     , 'htmlfile'
     , 'xhr-polling'
     , 'jsonp-polling'
